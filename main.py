@@ -56,7 +56,9 @@ def main(_):
   summary_writer = tf.summary.create_file_writer(logdir)
 
   for epoch in range(FLAGS.epochs):
-    for dataset in train_dataset:
+    for step, dataset in enumerate(train_dataset):
+      if step == FLAGS.steps_per_epoch:
+        break
       output1, output2, output3, loss = train_step(model,
                                                    optimizer=optimizer,
                                                    loss_fn=loss_fn,
