@@ -36,15 +36,15 @@ def main(_):
     logdir = './logs/scalars/' + 'without_batch_norm'
 
   model.compile(optimizer=tf.keras.optimizers.SGD(), # Default learning rate 0.01
-                loss='categorical_crossentropy',
+                loss='sparse_categorical_crossentropy',
                 metrics=['accuracy'])
 
   
   tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
 
   model.fit(train_dataset,
-            epochs=1,
-            steps_per_epoch=600000,
+            epochs=100,
+            steps_per_epoch=6000,
             callbacks=[tensorboard_callback])
 
 if __name__ == '__main__':
